@@ -1,5 +1,6 @@
 package foxapp.stepdefinitions;
 
+import org.junit.Assert;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
@@ -8,6 +9,7 @@ import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
 import io.github.bonigarcia.wdm.WebDriverManager;
+
 
 public class addToCartStepDefinitions {
 
@@ -53,7 +55,7 @@ public class addToCartStepDefinitions {
 	}
 
 	@Then("I should see {int} {string} in the cart")
-	public void i_should_see_in_the_cart(Integer int1, String string) {
+	public void i_should_see_in_the_cart(int productquantity, String product) {
 		
 		By productNameField = By.xpath("//tr/td[@class='product-name']/a");
 		//By productNameField = By.cssSelector("td[class='product-name'] a");
@@ -62,6 +64,8 @@ public class addToCartStepDefinitions {
 		By ProductQuantityField = By.xpath("//input[@type='number']");
 		String actualQuantity = driver.findElement(ProductQuantityField).getAttribute("value");
 		  
+		Assert.assertEquals(product, actualProductName);
+		Assert.assertEquals(productquantity, Integer.parseInt(actualQuantity));	
 		  
 	}
 
